@@ -32,7 +32,7 @@ public interface ProjectConfig extends Config {
     @Config.Key("accountPassword")
     String accountPassword();
 
-    @Config.DefaultValue("http://192.168.1.51:3000")
+    @Config.DefaultValue("http://192.168.1.51:3000/")
     @Config.Key("baseUrl")
     String baseUrl();
 }

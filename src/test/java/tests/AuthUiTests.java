@@ -6,7 +6,6 @@ import annotations.Layer;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import pages.AuthPage;
 import pages.AdminPage;
-import pages.RecoveryPasswordPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static helpers.DriverUtils.getConsoleLogs;
@@ -33,7 +31,7 @@ public class AuthUiTests extends TestBase {
     @JiraIssues({@JiraIssue("HOMEWORK-269")})
     @DisplayName("Лог консоли браузера на странице входа в Систему не содержит ошибок")
     void consoleLogShouldNotHaveErrors() {
-        AuthPage.openPage();
+        authPage.openPage();
 
         step("Страница входа в Систему не содержит ошибок в логах консоли браузера", () -> {
             String consoleLogs = getConsoleLogs();
@@ -49,7 +47,7 @@ public class AuthUiTests extends TestBase {
     @JiraIssues({@JiraIssue("HOMEWORK-269")})
     @DisplayName("Проверка заголовка страницы входа в Систему")
     void checkTitleTest() {
-        AuthPage authPage = AuthPage.openPage();
+        authPage.openPage();
         String expectedTitle = "Sign in to cargo-development";
 
         step("Заголовок страницы входа в Систему содержит '" + expectedTitle + "'", () -> {
@@ -68,15 +66,16 @@ public class AuthUiTests extends TestBase {
     @JiraIssues({@JiraIssue("HOMEWORK-269")})
     @DisplayName("Успешный вход в Систему")
     void loginSuccessful() {
-        AuthPage authPage = AuthPage.openPage();
+        AuthPage.openPage();
         authPage.setLoginValue("sysadmin");
         authPage.setPasswordValue(passwordValue);
         authPage.clickEnterButton();
 
         String expectedUserName = "S";
         step("Профиль пользователя содержит '" + expectedUserName + "'", () -> {
-            AdminPage AdminPage = new AdminPage();
-            AdminPage.userProfileName().shouldHave(text(expectedUserName));
+
+            adminPage.userProfileName().shouldHave(text(expectedUserName));
+            adminPage.checkThatProjectHas5Widgets();
         });
     }
 
@@ -91,8 +90,7 @@ public class AuthUiTests extends TestBase {
     @JiraIssues({@JiraIssue("HOMEWORK-269")})
     @DisplayName("Попытка входа в Систему с невалидным значением логина")
     void inputInvalidLoginShowErrorMessage() {
-        Faker faker = new Faker();
-        AuthPage authPage = AuthPage.openPage();
+        authPage.openPage();
         authPage.checkLoginInputExists();
         authPage.setLoginValue(faker.number().digits(3));
         authPage.setPasswordValue(faker.number().digits(3));
@@ -110,7 +108,7 @@ public class AuthUiTests extends TestBase {
     @DisplayName("Попытка входа в Систему без указания пароля")
     void passwordCouldNotBeEmpty() {
         Faker faker = new Faker();
-        AuthPage authPage = AuthPage.openPage();
+        authPage.openPage();
         authPage.checkLoginInputExists();
         authPage.setLoginValue(faker.number().digits(3));
         authPage.clickEnterButton();

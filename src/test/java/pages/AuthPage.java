@@ -5,9 +5,9 @@ import config.Project;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 
+import static com.codeborne.selenide.CollectionCondition.itemWithText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class AuthPage extends BasePage {
 
@@ -47,12 +47,7 @@ public class AuthPage extends BasePage {
         $("#kc-login").click();
     }
 
-    @Step("Нажать на ссылку 'Восстановить пароль'")
-    public RecoveryPasswordPage clickRecoveryPasswordLink() {
-        $(".ant-avatar-string").click();
-        $(".ant-dropdown-menu-item-icon").click();
-        return new RecoveryPasswordPage();
-    }
+
 
 
 
