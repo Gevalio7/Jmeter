@@ -18,7 +18,7 @@ public interface ProjectConfig extends Config {
     @Config.Key("browserVersion")
     String browserVersion();
 
-    @Config.DefaultValue("1920x1080")
+    @Config.DefaultValue("1920x900")
     @Config.Key("browserSize")
     String browserSize();
 
@@ -32,7 +32,7 @@ public interface ProjectConfig extends Config {
     @Config.Key("accountPassword")
     String accountPassword();
 
-    @Config.DefaultValue("https://sdo-oib-test.it2g.ru/")
+    @Config.DefaultValue("http://192.168.1.51:3000")
     @Config.Key("baseUrl")
     String baseUrl();
 }

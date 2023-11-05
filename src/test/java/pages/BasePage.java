@@ -13,7 +13,7 @@ public abstract class BasePage {
 
     public void checkAlertContainsMessage(String value) {
         step("Отображено сообщение об ошибке '" + value + "'", () -> {
-            $(".alert-error").shouldHave(text(value));
+            $("#input-error").shouldHave(text(value));
         });
     }
 }

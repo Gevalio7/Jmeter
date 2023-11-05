@@ -9,22 +9,28 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class FrteOibAuthPage extends BasePage {
+public class AuthPage extends BasePage {
+
+
+
+    public SelenideElement userProfileName() {
+        return $(".ant-avatar-string");
+    }
 
     @Step("Открыть страницу входа в систему")
-    public static FrteOibAuthPage openPage() {
-        open(Project.config.baseUrl() + "admin/");
-        return new FrteOibAuthPage();
+    public static AuthPage openPage() {
+        open(Project.config.baseUrl());
+        return new AuthPage();
     }
 
     @Step("Открытая страница содержит поле 'Логин'")
     public void checkLoginInputExists() {
-        $("#identifier").shouldBe(visible);
+        $("#username").shouldBe(visible);
     }
 
     @Step("Заполнить поле 'Логин'")
     public void setLoginValue(String loginValue) {
-        SelenideElement login = $("#identifier");
+        SelenideElement login = $("#username");
         clearInputValue(login);
         login.setValue(loginValue);
     }
@@ -38,14 +44,17 @@ public class FrteOibAuthPage extends BasePage {
 
     @Step("Нажать кнопку 'Войти'")
     public void clickEnterButton() {
-        $(".loginBtn").click();
+        $("#kc-login").click();
     }
 
     @Step("Нажать на ссылку 'Восстановить пароль'")
-    public FrteOibRecoveryPasswordPage clickRecoveryPasswordLink() {
-        $(".recovery").click();
-        return new FrteOibRecoveryPasswordPage();
+    public RecoveryPasswordPage clickRecoveryPasswordLink() {
+        $(".ant-avatar-string").click();
+        $(".ant-dropdown-menu-item-icon").click();
+        return new RecoveryPasswordPage();
     }
+
+
 
     private void clearInputValue(SelenideElement element) {
         element.sendKeys(Keys.CONTROL + "A");

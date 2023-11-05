@@ -4,8 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class FrteOibAdminPage extends BasePage {
+public class AdminPage extends BasePage {
     public SelenideElement userProfileName() {
-        return $(".header-username");
+        return $(".ant-avatar-string");
     }
 }
